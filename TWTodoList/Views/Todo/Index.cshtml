@@ -1,0 +1,61 @@
+﻿@model ListTodoViewModel
+
+<div class="row">
+    <div class="col text-center">
+        <h1>@ViewData["Title"]</h1>
+    </div>
+</div>
+
+<div class="table-responsive-sm">
+    <table class="table">
+        <caption>List of users</caption>
+        <thead>
+            <tr>
+                <th scope="col">Título</th>
+                <th scope="col">Data</th>
+                <th scope="col">Está Completa?</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var todo in Model.Todos)
+            {
+                <tr>
+                    <td>@todo.Title</td>
+                    <td>@todo.Date</td>
+                    @if (todo.IsCompleted)
+                    {
+                        <td>@ViewData["TarefaCompleta"] </td>
+                    }
+                    else
+                    {
+                        <td>@ViewData["TarefaIncompleta"] </td>
+                    }
+
+                    <td>
+                        @if(@todo.IsCompleted)
+                        {
+                            <a asp-action="Complet" asp-route-id="@todo.Id" class="btn btn-sm btn-dark">Desfazer</a>
+                        }
+                        else
+                        {                        
+                            <a asp-action="Complet" asp-route-id="@todo.Id" class="btn btn-sm btn-success">Completar</a>
+                        }                        
+                        <a href="" class="btn btn-sm btn-warning">Editar</a>
+                        <a asp-controller="Todo" 
+                        asp-action="Delete" 
+                        asp-route-id="@todo.Id" 
+                        class="btn btn-sm btn-danger">Apagar
+                    </a>
+                    </td>
+                </tr>          
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="row">
+    <div class="col">
+        <a asp-controller="Todo" asp-action="Create" class="btn btn-primary">Nova Tarefa</a>
+    </div>
+</div>

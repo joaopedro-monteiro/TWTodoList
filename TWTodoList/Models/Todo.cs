@@ -10,7 +10,7 @@ public class Todo
     public Todo(string? title, DateTime date, bool isCompleted = false)
     {
         Title = title;
-        Date = date;
+        Date = date.Date;
         IsCompleted = isCompleted;
     }
 }
