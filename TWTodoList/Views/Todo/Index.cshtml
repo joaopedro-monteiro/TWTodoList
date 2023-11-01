@@ -22,14 +22,14 @@
             {
                 <tr>
                     <td>@todo.Title</td>
-                    <td>@todo.Date.Date</td>
+                    <td>@todo.Date.ToString("dd/MM/yyyy")</td>
                     @if (todo.IsCompleted)
                     {
-                        <td>@ViewData["TarefaCompleta"] </td>
+                        <td><i class="text-success" data-feather="check-square"></i></td>
                     }
                     else
                     {
-                        <td>@ViewData["TarefaIncompleta"] </td>
+                        <td><i class="text-danger" data-feather="x-square"></i></td>
                     }
 
                     <td>
@@ -40,11 +40,14 @@
                         else
                         {                        
                             <a asp-action="Complet" asp-route-id="@todo.Id" class="btn btn-sm btn-success">Completar</a>
-                        }                        
+                        }   
+                        
                         <a asp-action="Edit" asp-route-id="@todo.Id" class="btn btn-sm btn-warning">Editar</a>
+
                         <a asp-controller="Todo" 
                         asp-action="Delete" 
-                        asp-route-id="@todo.Id" 
+                        asp-route-id="@todo.Id"
+                        onclick="return confirm('Deseja realmente excluir essa tarefa?')"
                         class="btn btn-sm btn-danger">Apagar
                     </a>
                     </td>
